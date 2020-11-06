@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mirror.brouits\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-07 13:02+0000\n"
+"POT-Creation-Date: 2020-11-06 01:57+0000\n"
 "PO-Revision-Date: 2020-02-11 21:30+0000\n"
 "Last-Translator: Anne017 <anneonyme017@openmailbox.org>\n"
 "Language: fr\n"
@@ -17,46 +17,50 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../qml/Main.qml:67 mirror.desktop.in.h:1
+#: ../qml/Main.qml:65 mirror.desktop.in.h:1
 msgid "Mirror"
 msgstr "Miroir"
 
-#: ../qml/Main.qml:71
+#: ../qml/Main.qml:70
 msgid "Settings"
 msgstr "Paramètres"
 
-#: ../qml/Main.qml:140
+#: ../qml/Main.qml:77
+msgid "Filter"
+msgstr "Filtre"
+
+#: ../qml/Main.qml:179
 msgid "Share your Snapshot!"
 msgstr "Partagez votre cliché !"
 
-#: ../qml/Main.qml:191
+#: ../qml/Main.qml:233
 msgid "Confirm"
 msgstr "Confirmer"
 
-#: ../qml/Main.qml:192
+#: ../qml/Main.qml:234
 msgid "Share this snapshot?"
 msgstr "Partager ce cliché ?"
 
-#: ../qml/Main.qml:195
+#: ../qml/Main.qml:237
 msgid "Yes"
 msgstr "Oui"
 
-#: ../qml/Main.qml:209
+#: ../qml/Main.qml:252
 msgid "No"
 msgstr "Non"
 
-#: ../qml/Main.qml:256
+#: ../qml/Main.qml:299
 msgid "Preferences"
 msgstr "Préférences"
 
-#: ../qml/Main.qml:260
+#: ../qml/Main.qml:303
 msgid "Include frame into snap"
 msgstr "Inclure le cadre au cliché"
 
-#: ../qml/Main.qml:271
+#: ../qml/Main.qml:315
 msgid "Unmirror snapshot"
 msgstr "Inverser le cliché"
 
-#: ../qml/Main.qml:282
+#: ../qml/Main.qml:327
 msgid "Choose a frame color"
 msgstr "Choisir une couleur de cadre"

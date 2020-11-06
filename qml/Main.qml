@@ -63,12 +63,23 @@ MainView {
             header: PageHeader {
                 id: header
                 title: i18n.tr('Mirror')
+
                 trailingActionBar.actions: [
                     Action {
                         iconName: "settings"
                         text: i18n.tr("Settings")
                         onTriggered: {
                             PopupUtils.open(dialog)
+                        }
+                    },
+                    Action {
+                        iconName: "filter"
+                        text: i18n.tr("Filter")
+                        property int index: 0
+                        onTriggered: {
+                            var len = camera.imageProcessing.supportedColorFilters.length
+                            index = (index + 1) % len
+                            camera.imageProcessing.colorFilter = camera.imageProcessing.supportedColorFilters[index]
                         }
                     }
                 ]
@@ -79,6 +90,7 @@ MainView {
                 position: Camera.FrontFace
 
                 flash.mode: Camera.FlashOff
+                imageProcessing.colorFilter: CameraImageProcessing.ColorFilterNone
                 imageProcessing.whiteBalanceMode: CameraImageProcessing.WhiteBalanceAuto
 
                 exposure {

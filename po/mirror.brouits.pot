@@ -21,8 +21,12 @@ msgstr ""
 msgid "Mirror"
 msgstr ""
 
-#: ../qml/Main.qml:69
+#: ../qml/Main.qml:70
 msgid "Settings"
+msgstr ""
+
+#: ../qml/Main.qml:77
+msgid "Filter"
 msgstr ""
 
 #: ../qml/Main.qml:171
