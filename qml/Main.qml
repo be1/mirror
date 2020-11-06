@@ -13,7 +13,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 import QtQuick 2.7
 import QtQml 2.2
 import QtQuick.Window 2.2
@@ -40,8 +39,7 @@ MainView {
 
     Component {
         id: snapComponent
-        ContentItem {
-        }
+        ContentItem {}
     }
 
     Settings {
@@ -87,6 +85,7 @@ MainView {
                     exposureCompensation: -1.0
                     exposureMode: Camera.ExposurePortrait
                 }
+
             }
 
             Rectangle {
@@ -118,12 +117,44 @@ MainView {
                     source: camera
                     visible: !photoPreview.visible
 
-                    MouseArea {
+                    PinchArea {
+                        id: zoom
                         anchors.fill: parent
+                        pinch.minimumScale: 0.1
+                        pinch.maximumScale: 10
+                        pinch.dragAxis: Pinch.XAndYAxis
 
-                        onClicked: {
-                            clock.visible = true;
-                            timer.start()
+                        onPinchUpdated: {
+                            var optical = false
+
+                            if (camera.maximumOpticalZoom > 1.0)
+                                optical = true
+
+                            if (pinch.scale > 0) {
+                                var ratio
+                                if (optical) {
+                                    ratio = camera.maximumOpticalZoom / zoom.pinch.maximumScale
+                                    camera.opticalZoom = pinch.scale * ratio
+                                 } else {
+                                    ratio = camera.maximumDigitalZoom / zoom.pinch.maximumScale
+                                    camera.digitalZoom = pinch.scale * ratio
+                                 }
+                            } else {
+                                if (optical) {
+                                    camera.opticalZoom = pinch.previousScale
+                                } else {
+                                    camera.digitalZoom = pinch.previousScale
+                                }
+                            }
+                        }
+
+                        MouseArea {
+                            anchors.fill: parent
+
+                            onClicked: {
+                                clock.visible = true
+                                timer.start()
+                            }
                         }
                     }
                 }
@@ -139,9 +170,11 @@ MainView {
                         photoPreview.source = result.url
                         info.text = i18n.tr("Share your Snapshot!")
                         photoPreview.visible = true
-                        var item = snapComponent.createObject(root, { "url": path })
+                        var item = snapComponent.createObject(root, {
+                                                                  "url": path
+                                                              })
                         snapshotItems.push(item)
-                    });
+                    })
                 }
             }
 
@@ -160,6 +193,7 @@ MainView {
 
                 Text {
                     id: info
+
                     anchors {
                         horizontalCenter: parent.horizontalCenter
                         bottom: parent.bottom
@@ -173,7 +207,6 @@ MainView {
 
                 MouseArea {
                     anchors.fill: parent
-
                     onClicked: {
                         PopupUtils.open(yesno)
                     }
@@ -184,6 +217,7 @@ MainView {
                 id: yesno
                 Dialog {
                     id: confirmation
+
                     anchors {
                         fill: parent
                     }
@@ -193,12 +227,13 @@ MainView {
 
                     Button {
                         text: i18n.tr("Yes")
+
                         onClicked: {
                             PopupUtils.close(confirmation)
                             photoPreview.visible = false
                             if (root.exportRequested) {
                                 root.exportTransfer.items = snapshotItems
-                                    root.exportTransfer.state = ContentTransfer.Charged
+                                root.exportTransfer.state = ContentTransfer.Charged
                             } else if (snapshotItems.length > 0) {
                                 pages.push(sharePage)
                             }
@@ -258,6 +293,7 @@ MainView {
                     Label {
                         anchors.right: parent.right
                         text: i18n.tr("Include frame into snap")
+
                         Switch {
                             anchors.right: parent.right
                             checked: settings.snapframe
@@ -269,6 +305,7 @@ MainView {
                     Label {
                         anchors.right: parent.right
                         text: i18n.tr("Unmirror snapshot")
+
                         Switch {
                             anchors.right: parent.right
                             checked: settings.unmirror
@@ -285,6 +322,7 @@ MainView {
                     Button {
                         text: "pink"
                         color: text
+
                         onClicked: {
                             settings.frame = color
                             PopupUtils.close(options)
@@ -294,6 +332,7 @@ MainView {
                     Button {
                         text: "steelblue"
                         color: text
+
                         onClicked: {
                             settings.frame = color
                             PopupUtils.close(options)
@@ -303,6 +342,7 @@ MainView {
                     Button {
                         text: "gray"
                         color: text
+
                         onClicked: {
                             settings.frame = color
                             PopupUtils.close(options)
@@ -312,6 +352,7 @@ MainView {
                     Button {
                         text: "salmon"
                         color: text
+
                         onClicked: {
                             settings.frame = color
                             PopupUtils.close(options)
@@ -321,6 +362,7 @@ MainView {
                     Button {
                         text: "violet"
                         color: text
+
                         onClicked: {
                             settings.frame = color
                             PopupUtils.close(options)
@@ -330,6 +372,7 @@ MainView {
                     Button {
                         text: "seagreen"
                         color: text
+
                         onClicked: {
                             settings.frame = color
                             PopupUtils.close(options)
@@ -361,6 +404,7 @@ MainView {
 
     Connections {
         target: ContentHub
+
         onExportRequested: {
             root.exportTransfer = transfer
             root.exportRequested = true
