@@ -71,7 +71,7 @@ MainView {
                         onTriggered: {
                             PopupUtils.open(dialog)
                         }
-                    },
+                    } /*,
                     Action {
                         iconName: "filter"
                         text: i18n.tr("Filter")
@@ -81,7 +81,7 @@ MainView {
                             index = (index + 1) % len
                             camera.imageProcessing.colorFilter = camera.imageProcessing.supportedColorFilters[index]
                         }
-                    }
+                    }*/
                 ]
             }
 

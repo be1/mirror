@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mirror.brouits\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-06 07:10+0000\n"
+"POT-Creation-Date: 2020-11-06 11:03+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,42 +25,38 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: ../qml/Main.qml:77
-msgid "Filter"
-msgstr ""
-
-#: ../qml/Main.qml:171
+#: ../qml/Main.qml:183
 msgid "Share your Snapshot!"
 msgstr ""
 
-#: ../qml/Main.qml:225
+#: ../qml/Main.qml:237
 msgid "Confirm"
 msgstr ""
 
-#: ../qml/Main.qml:226
+#: ../qml/Main.qml:238
 msgid "Share this snapshot?"
 msgstr ""
 
-#: ../qml/Main.qml:229
+#: ../qml/Main.qml:241
 msgid "Yes"
 msgstr ""
 
-#: ../qml/Main.qml:244
+#: ../qml/Main.qml:256
 msgid "No"
 msgstr ""
 
-#: ../qml/Main.qml:291
+#: ../qml/Main.qml:303
 msgid "Preferences"
 msgstr ""
 
-#: ../qml/Main.qml:295
+#: ../qml/Main.qml:307
 msgid "Include frame into snap"
 msgstr ""
 
-#: ../qml/Main.qml:307
+#: ../qml/Main.qml:319
 msgid "Unmirror snapshot"
 msgstr ""
 
-#: ../qml/Main.qml:319
+#: ../qml/Main.qml:331
 msgid "Choose a frame color"
 msgstr ""
