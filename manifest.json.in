@@ -10,7 +10,7 @@
             "content-hub": "mirror-contenthub.json"
         }
     },
-    "version": "1.9",
+    "version": "1.10",
     "maintainer": "Benoît Rouits <brouits@free.fr>",
     "framework" : "ubuntu-sdk-16.04.5"
 }
