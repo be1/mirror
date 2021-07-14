@@ -137,23 +137,16 @@ MainView {
                         id: zoom
                         anchors.fill: parent
 
-                        property bool optical: camera.maximumOpticalZoom > 1.0
+                        property real maxoptic: camera.maximumOpticalZoom ? camera.maximumOpticalZoom : 1.0
+                        property real maxdigit: camera.maximumDigitalZoom ? camera.maximumDigitalZoom : 1.0
+                        property real curoptic: camera.opticalZoom ? camera.opticalZoom : 1.0
+                        property real curdigit: camera.digitalZoom ? camera.digitalZoom : 1.0
+
+                        property real maxZoom: maxoptic * maxdigit
                         property real lastZoom: 1.0
-                        property real maxZoom: {
-                            if (optical) {
-                                return camera.maximumOpticalZoom
-                            } else {
-                                return camera.maximumDigitalZoom
-                            }
-                        }
 
                         onPinchFinished: {
-                            lastZoom *= pinch.scale
-                            if (lastZoom > maxZoom) {
-                                lastZoom = maxZoom
-                            } else if (lastZoom < 1.0) {
-                                lastZoom = 1.0
-                            }
+                            lastZoom = curoptic * curdigit
                         }
 
                         onPinchUpdated: {
@@ -165,11 +158,8 @@ MainView {
                                 z = 1.0
                             }
 
-                            if (optical) {
-                                camera.opticalZoom = z
-                            } else {
-                                camera.digitalZoom = z
-                            }
+                            camera.opticalZoom = z < maxoptic ? z : maxoptic
+                            camera.digitalZoom = z < maxoptic ? 1.0 : z / maxoptic
                         }
 
                         MouseArea {
