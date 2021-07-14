@@ -21,7 +21,7 @@ import Ubuntu.Components.Popups 1.3
 //import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import Qt.labs.settings 1.0
-import QtMultimedia 5.9
+import QtMultimedia 5.11
 import Ubuntu.Content 1.3
 import TempPath 1.0
 
