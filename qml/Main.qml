@@ -71,17 +71,19 @@ MainView {
                         onTriggered: {
                             PopupUtils.open(dialog)
                         }
-                    } /*,
+                    },
                     Action {
                         iconName: "filter"
                         text: i18n.tr("Filter")
                         property int index: 0
                         onTriggered: {
                             var len = camera.imageProcessing.supportedColorFilters.length
-                            index = (index + 1) % len
-                            camera.imageProcessing.colorFilter = camera.imageProcessing.supportedColorFilters[index]
+                            if (len) {
+                                index = (index + 1) % len
+                                camera.imageProcessing.colorFilter = camera.imageProcessing.supportedColorFilters[index]
+                            }
                         }
-                    }*/
+                    }
                 ]
             }
 
@@ -165,7 +167,7 @@ MainView {
 
                             onClicked: {
                                 clock.visible = true
-                                timer.start()
+                                countTimer.start()
                             }
                         }
                     }
@@ -262,30 +264,23 @@ MainView {
                 }
             }
 
-            Image {
+            Clock {
                 id: clock
+
                 visible: false
+                anchors.fill: parent
 
-                anchors {
-                    horizontalCenter: parent.horizontalCenter
-                    bottom: parent.bottom
-                    bottomMargin: units.gu(9)
-                }
+                text: countTimer.seconds
 
-                source: "../assets/clock.png"
-                fillMode: Image.Pad
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        timer.stop()
-                        clock.visible = false
-                    }
+                onClicked: {
+                    countTimer.stop()
+                    clock.visible = false
                 }
             }
 
-            Timer {
-                id: timer
+            CountTimer {
+                id: countTimer
+
                 onTriggered: {
                     frame.captureStillImage()
                 }
