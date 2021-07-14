@@ -136,32 +136,39 @@ MainView {
                     PinchArea {
                         id: zoom
                         anchors.fill: parent
-                        pinch.minimumScale: 0.1
-                        pinch.maximumScale: 10
-                        pinch.dragAxis: Pinch.XAndYAxis
+
+                        property bool optical: camera.maximumOpticalZoom > 1.0
+                        property real lastZoom: 1.0
+                        property real maxZoom: {
+                            if (optical) {
+                                return camera.maximumOpticalZoom
+                            } else {
+                                return camera.maximumDigitalZoom
+                            }
+                        }
 
                         onPinchUpdated: {
-                            var optical = false
-
-                            if (camera.maximumOpticalZoom > 1.0)
-                                optical = true
-
-                            if (pinch.scale > 0) {
-                                var ratio
-                                if (optical) {
-                                    ratio = camera.maximumOpticalZoom / zoom.pinch.maximumScale
-                                    camera.opticalZoom = pinch.scale * ratio
-                                 } else {
-                                    ratio = camera.maximumDigitalZoom / zoom.pinch.maximumScale
-                                    camera.digitalZoom = pinch.scale * ratio
-                                 }
-                            } else {
-                                if (optical) {
-                                    camera.opticalZoom = pinch.previousScale
-                                } else {
-                                    camera.digitalZoom = pinch.previousScale
-                                }
+                            var z
+                            if (pinch.scale - pinch.previousScale > 0) {
+                                z = lastZoom + pinch.scale
+                            } else if (pinch.scale - pinch.previousScale < 0) {
+                                z = lastZoom - pinch.scale
                             }
+
+
+                            if (z > maxZoom) {
+                                z = maxZoom
+                            } else if (z < 1.0) {
+                                z = 1.0
+                            }
+
+                            if (optical) {
+                                camera.opticalZoom = z
+                            } else {
+                                camera.digitalZoom = z
+                            }
+
+                            lastZoom = z;
                         }
 
                         MouseArea {
