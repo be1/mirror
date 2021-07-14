@@ -147,14 +147,17 @@ MainView {
                             }
                         }
 
-                        onPinchUpdated: {
-                            var z
-                            if (pinch.scale - pinch.previousScale > 0) {
-                                z = lastZoom + pinch.scale
-                            } else if (pinch.scale - pinch.previousScale < 0) {
-                                z = lastZoom - pinch.scale
+                        onPinchFinished: {
+                            lastZoom *= pinch.scale
+                            if (lastZoom > maxZoom) {
+                                lastZoom = maxZoom
+                            } else if (lastZoom < 1.0) {
+                                lastZoom = 1.0
                             }
+                        }
 
+                        onPinchUpdated: {
+                            var z = lastZoom * pinch.scale
 
                             if (z > maxZoom) {
                                 z = maxZoom
@@ -167,8 +170,6 @@ MainView {
                             } else {
                                 camera.digitalZoom = z
                             }
-
-                            lastZoom = z;
                         }
 
                         MouseArea {
