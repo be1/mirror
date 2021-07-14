@@ -78,8 +78,10 @@ MainView {
                         property int index: 0
                         onTriggered: {
                             var len = camera.imageProcessing.supportedColorFilters.length
+                            console.log("color filters:", len);
                             if (len) {
                                 index = (index + 1) % len
+                                console.log("current color filter:", index);
                                 camera.imageProcessing.colorFilter = camera.imageProcessing.supportedColorFilters[index]
                             }
                         }
