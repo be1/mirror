@@ -150,8 +150,7 @@ MainView {
                         }
 
                         onPinchUpdated: {
-                            var s = pinch.scale >= 1.0 ? pinch.scale : - (1 / pinch.scale)
-
+                            var s = pinch.scale >= 1.0 ? pinch.scale - 1.0 : - (1 / pinch.scale)
                             var z = lastZoom + 10 * s
 
                             if (z > maxZoom) {
